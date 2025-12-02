@@ -1,0 +1,2 @@
+
+access static files from django project

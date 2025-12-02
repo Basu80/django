@@ -1,0 +1,39 @@
+This is standard Django application without third-party dependencies
+
+>Run this project  
+create and activate a virtual environment, python -m venv venv
+Activate it with .\venv\Scripts\activate
+
+
+Then  install Django run pip install django 
+
+
+run migrations, .
+ pip install Pillow
+
+ python manage.py migrate
+. 
+
+
+Now, run the development server.
+
+python manage.py runserver
+
+FOR ADMIN 
+
+http://127.0.0.1:8000/admin/
+----------------------------
+Login:
+    username: admin
+    password: djangoadmin
+'''
+
+
+The Django admin is implemented by registering models in each app's admin.py file.(shop/admin.py and blog/admin.py.)
+In shop, Product, Contact, Order, and Orderupdate are registered. 
+In blog, BlogPost is registered. 
+
+This automatically creates UI for m
+
+
+  
