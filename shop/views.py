@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Product, Contact, Order, Orderupdate
 from math import ceil
@@ -108,13 +108,23 @@ def checkout(request):
         
         order = Order(items_json=itemsJson, amount=amount, first_name=first_name, last_name=last_name, phone=phone, email=email, address=address, district=district, province=province, zip_code=zip_code)
         order.save()
-        thank = True
         updateOrder = Orderupdate(order_id=order.order_id, update_desc="The order has been placed.")
         updateOrder.save()
-        id = order.order_id
-        return render(request, 'shop/checkout.html', {'thank': thank, 'id': id})
+        return redirect('OrderConfirmation', order_id=order.order_id)
 
     return render(request, 'shop/checkout.html')
+
+def order_confirmation(request, order_id):
+    order = Order.objects.get(order_id=order_id)
+    items_json = json.loads(order.items_json)
+    items = []
+    for key, value in items_json.items():
+        items.append({
+            'name': value[1],
+            'quantity': value[0],
+            'price': value[2]
+        })
+    return render(request, 'shop/order_confirmation.html', {'order': order, 'items': items})
 
 def category(request, category):
     products = Product.objects.filter(category=category)

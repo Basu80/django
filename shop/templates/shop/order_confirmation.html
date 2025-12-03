@@ -1,0 +1,51 @@
+{% extends 'shop/basic.html' %}
+
+{% block title %} Order Confirmation | Shop - Sasto Bazzar{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Order Confirmation</h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Thank you for your order, {{ order.first_name }}!</h5>
+                    <p class="card-text">Your order has been placed successfully. Your order ID is <strong>{{ order.order_id }}</strong>.</p>
+                    <p class="card-text">We have sent an email to <strong>{{ order.email }}</strong> with the order details.</p>
+                    <hr>
+                    <h5>Order Summary</h5>
+                    <ul class="list-group mb-3">
+                        {% for item in items %}
+                        <li class="list-group-item d-flex justify-content-between lh-sm">
+                            <div>
+                                <h6 class="my-0">{{ item.name }}</h6>
+                                <small class="text-muted">Quantity: {{ item.quantity }}</small>
+                            </div>
+                            <span class="text-muted">Rs. {{ item.price }}</span>
+                        </li>
+                        {% endfor %}
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Total (Rs)</span>
+                            <strong>{{ order.amount }}</strong>
+                        </li>
+                    </ul>
+                    <hr>
+                    <h5>Shipping Address</h5>
+                    <p>
+                        {{ order.first_name }} {{ order.last_name }}<br>
+                        {{ order.address }}<br>
+                        {{ order.district }}, {{ order.province }} - {{ order.zip_code }}<br>
+                        Phone: {{ order.phone }}
+                    </p>
+                    <div class="text-center mt-4">
+                        <a href="/shop/" class="btn btn-primary">Continue Shopping</a>
+                        <a href="/shop/tracker/" class="btn btn-secondary">Track Your Order</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

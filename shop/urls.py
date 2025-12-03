@@ -9,5 +9,6 @@ urlpatterns = [
     path('search/', views.search, name='Search'),
     path('productView/<int:myid>', views.productView, name='ProductView'),
     path('checkout/', views.checkout, name='Checkout'),
+    path('order_confirmation/<int:order_id>/', views.order_confirmation, name='OrderConfirmation'),
     path('category/<str:category>', views.category, name='Category'),
 ]
